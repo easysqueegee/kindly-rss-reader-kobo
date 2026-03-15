@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="/static/css/font-awesome.min.css?v={{version}}">
 <link rel="stylesheet" href="/static/css/general.css?v={{version}}">
 <link rel="stylesheet" href="/static/css/dark_theme.css?v={{version}}" class="alternate" {% if not config.dark_theme %} disabled="true" {% endif %}>
@@ -7,6 +8,15 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
 <link rel="manifest" href="/static/images/site.webmanifest">
 <script type="text/javascript">
+	document.addEventListener('touchend', function(e) {
+	    var now = new Date().getTime();
+	    if (now - lastTouchEnd <= 300) {
+	        e.preventDefault();
+	    }
+	    lastTouchEnd = now;
+	}, false);
+	
+	var lastTouchEnd = 0;
     var scrollPosition = 0;
     var bodyDiv = null;
     var offsetNotScroll = null;
