@@ -1,8 +1,10 @@
-FROM --platform=$BUILDPLATFORM nicoan/kindly-rss-builder AS builder
+FROM rust:alpine AS builder
 
 WORKDIR /home
 
-ENV PATH=$PATH:/build/cross-x86_64/bin
+RUN apk add --no-cache musl-dev gcc
+RUN ln -s /usr/bin/gcc /usr/bin/x86_64-linux-musl-gcc
+
 ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=x86_64-linux-musl-gcc
 
 RUN rustup target add x86_64-unknown-linux-musl
